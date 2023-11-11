@@ -15,7 +15,8 @@ my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.co
 my_fruit_list = my_fruit_list.set_index('Fruit') # This sets the fruit name column as the index
 
 #Add a pick list here so they can pick the fruit they want to include
-streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado', 'Strawberries']) #This addes the multi select, this also defines where the list is from. Also we add Avocados and Strawberries to be preselected.
+fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado', 'Strawberries']) #This addes the multi select, this also defines where the list is from. Also we add Avocados and Strawberries to be preselected.
+fruits_to_show = my_fruit_list.loc[fruits_selected] #This calls the fruits_selected variable and convers it into a boolean array.
 
-#Displace the table on the page
-streamlit.dataframe(my_fruit_list)
+#Display the table on the page
+streamlit.dataframe(fruits_to_show)
